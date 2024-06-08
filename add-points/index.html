@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Points on a map</title>
+    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js"></script>
+    <link
+      href="https://api.tiles.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <style>
+        body {
+          margin: 0;
+          padding: 0;
+        }
+  
+        #map {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          width: 100%;
+        }
+      </style>
+</head>
+<body>
+    <div id="map"></div>
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoibXItdGhvbWFzLXJvZ2VycyIsImEiOiJjbHV4MmJhZ2kwbW5lMmpxcmR4dmYyd3JpIn0.T4Knhl9eC-Nh-JNm2YQ3vw';
+        const map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mr-thomas-rogers/clx69lw4o01o301qs0smyevp6',
+            center: [-87.661557, 41.893748],
+            zoom: 10.7
+        });
+    </script>
+</body>
+</html>
