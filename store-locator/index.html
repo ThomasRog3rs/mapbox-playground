@@ -379,6 +379,10 @@
 
             const details = listing.appendChild(document.createElement('div'));
             details.innerHTML = `${store.properties.city}`;
+
+            if (store.properties.phone) {
+                details.innerHTML += ` &middot; ${store.properties.phoneFormatted}`;
+            }
         }
     }
     </script>
