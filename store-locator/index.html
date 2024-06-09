@@ -405,6 +405,20 @@
         buildLocationList(stores);
     });
 
+    map.on('click', (e) => {
+        const features = map.queryRenderedFeatures(e.point, {
+            layers: ['locations']
+        });
+
+        if(!features.length) return;
+
+        console.log(features);
+        const feature = features[0];
+
+        flyToStore(feature);
+        createPopUp(feature);
+    });
+
     function buildLocationList(stores){
         for(const store of stores.features){
             const listings = document.getElementById("listings");
