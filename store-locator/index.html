@@ -178,12 +178,12 @@
         const map = new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/mapbox/light-v11',
-            center: [-77.034084, 38.909671],
-            zoom: 13,
+            center: [-2.474008, 53.155133],
+            zoom: 4,
             scrollZoom: false
         });
 
-        const stores = {
+        let stores = {
         'type': 'FeatureCollection',
         'features': [
           {
@@ -200,6 +200,24 @@
               'country': 'United States',
               'crossStreet': 'at 15th St NW',
               'postalCode': '20005',
+              'state': 'D.C.'
+            }
+          },
+          {
+            'type': 'Feature',
+            'geometry': {
+              'type': 'Point',
+              'coordinates': [-2.930139, 53.598466]
+            },
+            'properties': {
+              'phoneFormatted': '01704 841924',
+              'phone': '01704 841924',
+              'address': 'Southport Rd, Scarisbrick, Ormskirk L40 9RH',
+              'city': 'Ormskirk',
+              'country': 'England',
+              'crossStreet': '',
+              'name': 'Scarisbrick Marina',
+              'postalCode': 'L40 9RH',
               'state': 'D.C.'
             }
           },
@@ -388,6 +406,21 @@
         ]
     };
 
+
+
+    fetch('./canalplan_places.geojson')
+        .then(response => response.json())
+        .then(data => {
+            console.log(data.features);
+            data.features = data.features.filter((x) => {
+                return x.properties.layer === "mooring"
+            });
+            console.log(data);
+            stores = data;
+        })
+        .catch(error => console.error('Error:', error));
+
+
     stores.features.forEach(function (store, i) {
         store.properties.id = i;
     });
@@ -465,7 +498,7 @@
 
         const popUp = new mapboxgl.Popup({closeOnClick: false})
             .setLngLat(currentFeature.geometry.coordinates)
-            .setHTML(`<h3>Sweetgreen</h3><h4>${currentFeature.properties.address}</h4>`)
+            .setHTML(`<h3>${currentFeature.properties.name}</h3><h4>${currentFeature.properties.address}</h4>`)
             .addTo(map);
         
         const activeItem = document.getElementsByClassName("active");
