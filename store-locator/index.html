@@ -102,7 +102,8 @@
         }
 
         .listings .item.active {
-        background-color: #f8f8f8;
+            background-color: #44641a;
+            color: white;
         }
 
         ::-webkit-scrollbar {
@@ -466,6 +467,14 @@
             .setLngLat(currentFeature.geometry.coordinates)
             .setHTML(`<h3>Sweetgreen</h3><h4>${currentFeature.properties.address}</h4>`)
             .addTo(map);
+        
+        const activeItem = document.getElementsByClassName("active");
+        if(activeItem[0]){
+            activeItem[0].classList.remove("active");
+        }
+
+        const listing = document.getElementById(`listing-${currentFeature.properties.id}`);
+        listing.classList.add('active');
     }
     </script>
 </body>
